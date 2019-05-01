@@ -3,7 +3,6 @@ require('dotenv').config();
 
 mongoose.Promise = global.Promise;
 
-// Get uri from Atlas and use password in .env
 const uri = 'mongodb://localhost:27017/trello';
 mongoose.connect(uri, { useNewUrlParser: true });
 
@@ -27,11 +26,6 @@ const dbSchema = mongoose.Schema({
 
 const Board = mongoose.model('boards', dbSchema);
 
-// const addNewPerson = (name, age) => {
-//   const newPerson = new Board({ name, age });
-//   newPerson.save();
-// };
-
 const getBoard = boardId => Board.findOne({ _id: boardId });
 
 const addBoard = (boardId, lists) => {
@@ -43,12 +37,10 @@ const getList = (listTitle) => (
   Board.findOne({ 'lists.title': listTitle })
 )
 
-const addList = (boardId, list) => (
-  Board.findOneAndUpdate(
+const addList = (boardId, list) => Board.findOneAndUpdate(
     { _id: boardId },
     { $push: {lists: list}},
     { new: true}
-  )
 )
 
 module.exports = {

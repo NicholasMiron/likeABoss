@@ -13,25 +13,6 @@ class Board extends Component {
     }
   }
 
-  // let listStructure = {
-  //   title: 'String',
-  //   cards: [
-  //     {
-  //       title: 'String',
-  //       description: 'String',
-  //       people: 'Array',
-  //       labels: 'Array',
-  //       dueBy: 'String',
-  //     }
-  //   ]
-  // }
-
-  // let lists = [
-  //   listStrucutre,
-  //   listStrucutre,
-  //   listStrucutre
-  // ]
-
   showCardForm(listId) {
     document.getElementById('addCardForm').style.display = 'block';
     this.setState({currentList: listId})
