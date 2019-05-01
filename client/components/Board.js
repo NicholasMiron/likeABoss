@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import List from './List';
+import AddCardForm from './AddCardForm';
 
 class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lists: [{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]},{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]},{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]}]
+      lists: [{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]},{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]},{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]}],
+      boardMembers: ['Lion', 'Tiger', 'Ardvark', 'Mary Poppins'],
+      currentList: 0,
     }
   }
 
@@ -28,9 +31,17 @@ class Board extends Component {
   //   listStrucutre
   // ]
 
-  addCard(listId, card) {
-    console.log('Add a card');
+  showCardForm(listId) {
+    document.getElementById('addCardForm').style.display = 'block';
+    this.setState({currentList: listId})
     // let updatedList = [this.state.lists[listId]]
+  }
+
+  addCard(card) {
+    let updateLists = [...this.state.lists];
+    updateLists[this.state.currentList].cards.push(card);
+    this.setState({currentList: updateLists})
+    document.getElementById('addCardForm').style.display = 'none';
   }
 
   addList(e) {
@@ -39,6 +50,7 @@ class Board extends Component {
         let newLists = this.state.lists;
         let newList = {title: e.target.value, cards: []}
         newLists.push(newList);
+        e.target.value = '';
         this.setState({lists: newLists});
       }
     }
@@ -48,7 +60,7 @@ class Board extends Component {
     return ( 
       <div className={'board'}>
         {this.state.lists.map((list, i) => (
-          <List key={i} list={this.state.lists[i]} addCard={this.addCard.bind(this)} />
+          <List key={i} listId={i} boardMembers={this.state.boardMembers} list={this.state.lists[i]} showForm={this.showCardForm.bind(this)} />
         ))}
         <div className={'newListRow'}>
           <input 
@@ -59,6 +71,7 @@ class Board extends Component {
           >
           </input>
         </div>
+        <AddCardForm boardMembers={this.state.boardMembers} addCard={this.addCard.bind(this)}/>
       </div>
     );
   }
