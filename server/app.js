@@ -13,7 +13,7 @@ app.use(express.json({urlencoded: false}))
 app.use(express.static('dist'));
 
 app.get('/api/boards', (req, res) => {
-  const boardId = req.query.boardId;
+  const boardId = req.query.id;
   db.getBoard(boardId)
   .then(result => {
     res.send(result);

@@ -27,7 +27,6 @@ class AddCardForm extends Component {
   }
 
   handleSubmit(e) {
-    console.log('here');
     e.preventDefault();
     let newCard = {
       title: this.state.title,

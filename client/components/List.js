@@ -5,7 +5,7 @@ import Card from './Card';
 const List = ({list, showForm, listId}) => {
   return ( 
     <div className={'list'}>
-      <div className={'listTitle'}>{list.title}</div>
+      <div className={'listTitle'}>{list.name}</div>
       {list.cards.map((card, i) => (
         <>
           <Card key={i} card={card} />
