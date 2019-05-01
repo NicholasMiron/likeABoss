@@ -6,7 +6,8 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lists: [{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]},{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]},{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]}],
+      boardId: 1,
+      board: [{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]},{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]},{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]}],
       boardMembers: ['Lion', 'Tiger', 'Ardvark', 'Mary Poppins'],
       currentList: 0,
     }
@@ -38,9 +39,9 @@ class Board extends Component {
   }
 
   addCard(card) {
-    let updateLists = [...this.state.lists];
-    updateLists[this.state.currentList].cards.push(card);
-    this.setState({currentList: updateLists})
+    let updateBoard = [...this.state.board];
+    updateBoard[this.state.currentList].cards.push(card);
+    this.setState({currentList: updateBoard})
     document.getElementById('addCardForm').style.display = 'none';
   }
 
@@ -59,8 +60,8 @@ class Board extends Component {
   render() { 
     return ( 
       <div className={'board'}>
-        {this.state.lists.map((list, i) => (
-          <List key={i} listId={i} boardMembers={this.state.boardMembers} list={this.state.lists[i]} showForm={this.showCardForm.bind(this)} />
+        {this.state.board.map((list, i) => (
+          <List key={i} listId={i} boardMembers={this.state.boardMembers} list={list} showForm={this.showCardForm.bind(this)} />
         ))}
         <div className={'newListRow'}>
           <input 
