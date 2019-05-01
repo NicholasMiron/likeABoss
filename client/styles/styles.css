@@ -1,0 +1,34 @@
+.board {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 10px;
+}
+
+.list, .newListRow {
+  display: grid;
+  grid-auto-columns: 1fr;
+  overflow: auto;
+  grid-gap: 10px;
+  background-color: #665555;
+  padding: 10px;
+  border-radius: 7px;
+}
+
+.card {
+  grid-row: 2;
+  width: 250px;
+  border-radius: 7px;
+  padding: 4px;
+  background-color: #FFFFFF;
+}
+
+.newCard {
+  grid-row: 2;
+  width: 55px;
+  margin-right: 10px;
+}
+
+.newList {
+  width: 150px;
+  justify-self: center;
+}
