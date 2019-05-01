@@ -61,6 +61,17 @@ app.post('/api/boards/list', (req, res) => {
   })
 })
 
+app.put('/api/boards/list', (req, res) => {
+  const boardId = req.body.boardId;
+  const lists = req.body.lists;
 
-
+  db.updateLists(boardId, lists)
+  .then(results => {
+    console.log('hey there', results);
+    res.send(results);
+  })
+  .catch(err => {
+    res.send(err);
+  })
+})
 module.exports = app;

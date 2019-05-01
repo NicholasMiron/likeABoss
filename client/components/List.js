@@ -19,7 +19,7 @@ const List = ({list, showForm, listId}) => {
 List.propTypes = {
   list: PropTypes.array,
   showForm: PropTypes.func,
-  listId: PropTypes.number,
+  listId: PropTypes.numberf,
 }
 
 export default List;

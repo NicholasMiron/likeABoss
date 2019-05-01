@@ -43,9 +43,16 @@ const addList = (boardId, list) => Board.findOneAndUpdate(
     { new: true}
 )
 
+const updateLists = (boardId, lists) => Board.findOneAndUpdate(
+  {_id: boardId},
+  {lists: lists},
+  {new: true}
+)
+
 module.exports = {
   getBoard, 
   addBoard, 
   getList, 
-  addList
+  addList,
+  updateLists
 };
