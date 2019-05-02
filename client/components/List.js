@@ -6,11 +6,13 @@ const List = ({list, showForm, listId}) => {
   return ( 
     <div className={'list'}>
       <div className={'listTitle'}>{list.name}</div>
-      {list.cards.map((card, i) => (
-        <>
-          <Card key={i} cardId={i} card={card} updateCard={showForm} listId={listId}/>
-        </>
-      ))}
+      <div className={'cardList'}>
+        {list.cards.map((card, i) => (
+          <>
+            <Card key={i} cardId={i} card={card} updateCard={showForm} listId={listId}/>
+          </>
+        ))}
+      </div>
       <button className={'newCard'} onClick={() => showForm('add', listId)}>New Card</button>
     </div>
    );

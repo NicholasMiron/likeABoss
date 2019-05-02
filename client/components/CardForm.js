@@ -13,6 +13,7 @@ class CardForm extends Component {
   }
 
   componentDidMount() {
+    document.addEventListener('mousedown', this.closeForm.bind(this));
     this.setState({
       title: this.props.card.id || '',
       description: this.props.card.description || '',
@@ -44,6 +45,9 @@ class CardForm extends Component {
     this.props.handleSubmit(newCard);
   }
 
+  closeForm(e) {
+    if (e.target.id === 'modal') this.handleSubmit(e);
+  }
 
   render() { 
     return (  

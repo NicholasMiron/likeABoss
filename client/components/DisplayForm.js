@@ -5,15 +5,15 @@ import CardForm from './CardForm';
 const DisplayForm = ({whichForm, boardMembers, addCard, updateCard, card}) => {
   if (whichForm === 'add') {
     return (
-      <>
+      <div id={'modal'}>
         <CardForm boardMembers={boardMembers} handleSubmit={addCard} card={card} />
-      </>
+      </div>
     )
   } else if (whichForm === 'update') {
     return (
-      <>
+      <div id={'modal'}>
         <CardForm boardMembers={boardMembers} handleSubmit={updateCard} card={card} />
-      </>
+      </div>
     )
   } else return <></>
 }

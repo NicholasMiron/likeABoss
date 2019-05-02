@@ -107,8 +107,6 @@ class Board extends Component {
           updateCard={this.updateCard.bind(this)}
           card={this.state.currentCard}
         />
-        {/* <AddCardForm boardMembers={this.state.boardMembers} addCard={this.addCard.bind(this)}/> */}
-        {/* <EditCardForm boardMembers={this.state.boardMembers} updateCard={this.updateCard.bind(this)} card={this.state.currentCard}/> */}
       </div>
     );
   }
