@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import List from './List';
+
 import DisplayForm from './DisplayForm';
+import List from './List';
 
 class Board extends Component {
   constructor(props) {
@@ -33,7 +34,9 @@ class Board extends Component {
 
   updateBoardById(boardId, newLists) {
     axios.put('/api/boards/list', {boardId: boardId, lists: newLists})
-    .then(results => this.setState({currentList: results}))
+    .then(results => {
+        this.setState({currentList: results}, () => this.displayForm())
+    })
     .catch(console.log);
   }
 
@@ -47,7 +50,7 @@ class Board extends Component {
 
 
   //Helper functions
-  displayForm(formToDisplay, listId, cardId = 0, card = {}) {
+  displayForm(formToDisplay = '', listId = 0, cardId = 0, card = {}) {
     this.setState({
       currentForm: formToDisplay,
       currentList: listId, 
@@ -61,7 +64,6 @@ class Board extends Component {
     updateBoard[this.state.currentList].cards.push(card);
 
     this.updateBoardById(this.state.boardId, updateBoard);
-    document.getElementById('cardForm').style.display = 'none';
   }
 
   updateCard(card) {
@@ -69,7 +71,6 @@ class Board extends Component {
     updateBoard[this.state.currentList].cards[this.state.currentCardId] = card;
 
     this.updateBoardById(this.state.boardId, updateBoard);
-    document.getElementById('cardForm').style.display = 'none';
   }
 
   addList(e) {

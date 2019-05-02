@@ -5,7 +5,7 @@ class CardForm extends Component {
   constructor(props) {
     super(props);
     this.state = {  
-      id: '',
+      id: 'cardForm',
       title: '',
       description: '',
 
@@ -14,7 +14,6 @@ class CardForm extends Component {
 
   componentDidMount() {
     this.setState({
-      id: this.props.formId,
       title: this.props.card.id || '',
       description: this.props.card.description || '',
     })

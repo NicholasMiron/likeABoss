@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Card = ({card, updateCard, key, listId}) => {
+const Card = ({card, updateCard, cardId, listId}) => {
   return ( 
-    <div className={'card'} onClick={() => updateCard('update', listId, key, card)}>
+    <div className={'card'} onClick={() => updateCard('update', listId, cardId, card)}>
       <div>{card.description}</div>
       <div>{card.person}</div>
       <div>Like A Boss!</div>
@@ -17,7 +17,7 @@ Card.propTypes = {
     person: PropTypes.string,
   }),
   updateCard: PropTypes.func,
-  key: PropTypes.number,
+  cardId: PropTypes.number,
   listId: PropTypes.number,
 }
  

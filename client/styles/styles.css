@@ -33,7 +33,7 @@
   justify-self: center;
 }
 
-#addCardForm, #editCardForm, #cardForm {
+#cardForm {
   position:fixed;
   display: flex;
   justify-content: center;
