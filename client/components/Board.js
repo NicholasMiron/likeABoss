@@ -9,7 +9,7 @@ class Board extends Component {
     super(props);
     this.state = {
       boardId: 2,
-      lists: [{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]},{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]},{title:'List1',cards:[{title:'Hello',description:'World',people:['nick', 'joe', 'sally']}]}],
+      lists: [],
       boardMembers: ['Lion', 'Tiger', 'Ardvark', 'Mary Poppins'],
       currentList: 0,
       currentCard: {},
@@ -49,7 +49,7 @@ class Board extends Component {
   }
 
 
-  //Helper functions
+  //Turn form on or off
   displayForm(formToDisplay = '', listId = 0, cardId = 0, card = {}) {
     this.setState({
       currentForm: formToDisplay,
@@ -59,6 +59,8 @@ class Board extends Component {
     })
   }
 
+
+  //Card methods
   addCard(card) {
     let updateBoard = [...this.state.lists];
     updateBoard[this.state.currentList].cards.push(card);
@@ -73,9 +75,20 @@ class Board extends Component {
     this.updateBoardById(this.state.boardId, updateBoard);
   }
 
+  destroyCard(e) {
+    e.preventDefault();
+    let updateBoard = [...this.state.lists];
+    updateBoard[this.state.currentList].cards.splice(this.state.currentCardId, 1);
+
+    this.updateBoardById(this.state.boardId, updateBoard);
+  }
+
+
+  //List methods
   addList(e) {
     if (e.keyCode === 13 && e.target.value !== '') {
       let newList = {name: e.target.value, cards: []}
+      e.target.value = '';
       this.addListToBoard(this.state.boardId, newList);
     }
   }
@@ -105,6 +118,7 @@ class Board extends Component {
           boardMembers={this.state.boardMembers}
           addCard={this.addCard.bind(this)}
           updateCard={this.updateCard.bind(this)}
+          destroyCard={this.destroyCard.bind(this)}
           card={this.state.currentCard}
         />
       </div>

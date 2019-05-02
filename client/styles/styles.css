@@ -17,6 +17,7 @@
 .card {
   grid-row: 2;
   min-width: 250px;
+  width: 250px;
   height: auto;
   border-radius: 7px;
   padding: 4px;
@@ -61,7 +62,7 @@
   color: #FFFFFF;
 }
 
-form {
+#cardForm {
   background-color: #FFFFFF;
   color: black;
   width: 75vw;
@@ -80,7 +81,7 @@ form {
   flex-direction: column;
 }
 
-.submitNewCard {
+.formButton {
   width: 150px;
   justify-self: center;
 }

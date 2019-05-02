@@ -5,10 +5,9 @@ class CardForm extends Component {
   constructor(props) {
     super(props);
     this.state = {  
-      id: 'cardForm',
       title: '',
       description: '',
-
+      selectedMembers: [],
     }
   }
 
@@ -25,7 +24,7 @@ class CardForm extends Component {
   }
 
   handleSelect(e) {
-    let members = this.state.selectedMembers;
+    let members = [...this.state.selectedMembers];
     if (members.includes(e.target.value)) {
       let targetIndex = members.indexOf(e.target.value);
       members.splice(targetIndex, 1); 
@@ -42,6 +41,7 @@ class CardForm extends Component {
       description: this.state.description,
       people: this.state.selectedMembers,
     }
+    console.log(newCard);
     this.props.handleSubmit(newCard);
   }
 
@@ -51,39 +51,39 @@ class CardForm extends Component {
 
   render() { 
     return (  
-      <div id={this.state.id}>
-        <form>
-          <div className={'formTitle'}>
-            <label htmlFor={'title'}>Snippet of what needs to be done.</label>
-            <input 
-              onChange={e => this.handleChange(e)} 
-              type='text' 
-              name='title' 
-              placeholder='Title...'
-              value={this.state.title}
-            ></input>
-          </div>
-          <div className={'formDescription'}>
-            <label htmlFor={'description'}>More details!</label>
-            <input 
-              onChange={e => this.handleChange(e)} 
-              type='text' 
-              name='description' 
-              placeholder='Description...'
-              value={this.state.description}
-              ></input>
-          </div>
-          <div className={'assignMembers'} name={'assignMembers'}>
-            <label htmlFor={'assignMembers'}>Add people to card.</label>
-            {this.props.boardMembers.map((member, i) => (
-              <>
-                <input onChange={e => this.handleSelect(e)} type='checkbox' name={'member' + i} id={member} value={member} key={i}></input>
-                <label htmlFor={member}>{member}</label>
-              </>
-            ))}
-          </div>
-          <button className={'submitNewCard'} onClick={e => this.handleSubmit(e)}>Submit!</button>
-        </form>
+      <div id={'cardForm'}>
+        <div className={'formTitle'}>
+          <label htmlFor={'title'}>Snippet of what needs to be done.</label>
+          <input 
+            onChange={e => this.handleChange(e)} 
+            type='text' 
+            name='title' 
+            placeholder='Title...'
+            value={this.state.title}
+          ></input>
+        </div>
+        <div className={'formDescription'}>
+          <label htmlFor={'description'}>More details!</label>
+          <textarea 
+            rows={5}
+            col={50}
+            onChange={e => this.handleChange(e)} 
+            name='description' 
+            placeholder='Description...'
+            value={this.state.description}
+            ></textarea>
+        </div>
+        <div className={'assignMembers'} name={'assignMembers'}>
+          <label htmlFor={'assignMembers'}>Add people to card.</label>
+          {this.props.boardMembers.map((member, i) => (
+            <>
+              <input onChange={e => this.handleSelect(e)} type='checkbox' name={'member' + i} id={member} value={member} key={i}></input>
+              <label htmlFor={member}>{member}</label>
+            </>
+          ))}
+        </div>
+        <button className={'formButton'} onClick={e => this.props.handleDestroy(e)}>Destroy!</button>
+        <button className={'formButton'} onClick={e => this.handleSubmit(e)}>Submit!</button>
       </div>
     );
   }
@@ -93,7 +93,8 @@ CardForm.propTypes = {
   formId: PropTypes.string,
   card: PropTypes.object,
   boardMembers: PropTypes.array,
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  handleDestroy: PropTypes.func,
 }
  
 export default CardForm;
