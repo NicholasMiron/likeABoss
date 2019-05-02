@@ -35,7 +35,7 @@ class Board extends Component {
   updateBoardById(boardId, newLists) {
     axios.put('/api/boards/list', {boardId: boardId, lists: newLists})
     .then(results => {
-        this.setState({currentList: results}, () => this.displayForm())
+        this.setState({lists: results.data.lists}, () => this.displayForm())
     })
     .catch(console.log);
   }
@@ -49,7 +49,7 @@ class Board extends Component {
   }
 
 
-  //Turn form on or off
+  //Turn form on or off set state with last opened card
   displayForm(formToDisplay = '', listId = 0, cardId = 0, card = {}) {
     this.setState({
       currentForm: formToDisplay,
@@ -75,8 +75,7 @@ class Board extends Component {
     this.updateBoardById(this.state.boardId, updateBoard);
   }
 
-  destroyCard(e) {
-    e.preventDefault();
+  destroyCard() {
     let updateBoard = [...this.state.lists];
     updateBoard[this.state.currentList].cards.splice(this.state.currentCardId, 1);
 
@@ -88,9 +87,16 @@ class Board extends Component {
   addList(e) {
     if (e.keyCode === 13 && e.target.value !== '') {
       let newList = {name: e.target.value, cards: []}
-      e.target.value = '';
+      e.target.value = ''; //Reset input box
       this.addListToBoard(this.state.boardId, newList);
     }
+  }
+
+  destroyList(listId) {
+    let updateBoard = [...this.state.lists];
+    updateBoard.splice(listId, 1);
+
+    this.updateBoardById(this.state.boardId, updateBoard);
   }
 
   render() { 
@@ -102,7 +108,9 @@ class Board extends Component {
             list={list} 
             listId={i} 
             boardMembers={this.state.boardMembers}
-            showForm={this.displayForm.bind(this)} />
+            showForm={this.displayForm.bind(this)}
+            destroyList={this.destroyList.bind(this)}
+          />
         ))}
         <div className={'newListRow'}>
           <input 

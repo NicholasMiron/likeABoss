@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
 
-const List = ({list, showForm, listId}) => {
+const List = ({list, showForm, listId, destroyList}) => {
   return ( 
     <div className={'list'}>
       <div className={'listTitle'}>{list.name}</div>
@@ -14,6 +14,7 @@ const List = ({list, showForm, listId}) => {
         ))}
       </div>
       <button className={'newCard'} onClick={() => showForm('add', listId)}>New Card</button>
+      <button className={'destroyList'} onClick={() => destroyList(listId)}>Destroy List</button>
     </div>
    );
 }
@@ -21,7 +22,8 @@ const List = ({list, showForm, listId}) => {
 List.propTypes = {
   list: PropTypes.array,
   showForm: PropTypes.func,
-  listId: PropTypes.numberf,
+  listId: PropTypes.number,
+  destroyList: PropTypes.func,
 }
 
 export default List;

@@ -25,14 +25,14 @@
   margin: 4px;
 }
 
-.newCard {
+.newCard, .destroyList {
   grid-row: 1;
-  width: 55px;
+  width: 95px;
 }
 
 .listTitle {
   grid-row: 1;
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 10;
 }
 
 .newList {
