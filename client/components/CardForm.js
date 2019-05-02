@@ -1,14 +1,23 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class AddCardForm extends Component {
+class CardForm extends Component {
   constructor(props) {
-    super(props); 
-    this.state = {
+    super(props);
+    this.state = {  
+      id: '',
       title: '',
       description: '',
-      selectedMembers: [],
+
     }
+  }
+
+  componentDidMount() {
+    this.setState({
+      id: this.props.formId,
+      title: this.props.card.id || '',
+      description: this.props.card.description || '',
+    })
   }
 
   handleChange(e) {
@@ -33,20 +42,33 @@ class AddCardForm extends Component {
       description: this.state.description,
       people: this.state.selectedMembers,
     }
-    this.props.addCard(newCard);
+    this.props.handleSubmit(newCard);
   }
 
-  render() {
-    return ( 
-      <div id={'addCardForm'}>
+
+  render() { 
+    return (  
+      <div id={this.state.id}>
         <form>
           <div className={'formTitle'}>
             <label htmlFor={'title'}>Snippet of what needs to be done.</label>
-            <input onChange={e => this.handleChange(e)} type='text' name='title' placeholder='Title...'></input>
+            <input 
+              onChange={e => this.handleChange(e)} 
+              type='text' 
+              name='title' 
+              placeholder='Title...'
+              value={this.state.title}
+            ></input>
           </div>
           <div className={'formDescription'}>
             <label htmlFor={'description'}>More details!</label>
-            <input onChange={e => this.handleChange(e)} type='text' name='description' placeholder='Description...'></input>
+            <input 
+              onChange={e => this.handleChange(e)} 
+              type='text' 
+              name='description' 
+              placeholder='Description...'
+              value={this.state.description}
+              ></input>
           </div>
           <div className={'assignMembers'} name={'assignMembers'}>
             <label htmlFor={'assignMembers'}>Add people to card.</label>
@@ -64,9 +86,11 @@ class AddCardForm extends Component {
   }
 }
 
-AddCardForm.propTypes = {
+CardForm.propTypes = {
+  formId: PropTypes.string,
+  card: PropTypes.object,
   boardMembers: PropTypes.array,
-  addCard: PropTypes.func,
+  handleSubmit: PropTypes.func
 }
  
-export default AddCardForm;
+export default CardForm;

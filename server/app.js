@@ -67,7 +67,6 @@ app.put('/api/boards/list', (req, res) => {
 
   db.updateLists(boardId, lists)
   .then(results => {
-    console.log('hey there', results);
     res.send(results);
   })
   .catch(err => {
