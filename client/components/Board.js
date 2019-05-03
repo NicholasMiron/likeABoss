@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import DisplayForm from './DisplayForm';
@@ -21,7 +22,9 @@ class Board extends Component {
 
   //Initialize board
   componentDidMount() {
-   this.getBoardById(this.state.boardId);
+    this.setState({boardId:this.props.boardId}, () => {
+      this.getBoardById(this.state.boardId);
+    })
   }
 
 
@@ -145,6 +148,10 @@ class Board extends Component {
       </div>
     );
   }
+}
+
+Board.propTypes = {
+  boardId: PropTypes.number,
 }
  
 export default Board;

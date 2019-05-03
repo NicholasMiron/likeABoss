@@ -23,13 +23,7 @@ const dbSchema = mongoose.Schema({
     ], 
 });
 
-const userSchema = mongoose.Schema({
-  username: String,
-  password: String
-})
-
 const Board = mongoose.model('boards', dbSchema);
-const User = mongoose.model('users', userSchema);
 
 const getBoard = boardId => Board.findOne({ _id: boardId });
 
@@ -52,7 +46,6 @@ const updateLists = (boardId, lists) => Board.findOneAndUpdate(
   {new: true}
 )
 
-const checkForUser = (username) => User.findOne({ username })
 
 module.exports = {
   getBoard, 
@@ -60,5 +53,4 @@ module.exports = {
   getList, 
   addList,
   updateLists,
-  checkForUser
 };
