@@ -14,7 +14,7 @@ class CardForm extends Component {
   componentDidMount() {
     document.addEventListener('mousedown', this.closeForm.bind(this));
     this.setState({
-      title: this.props.card.id || '',
+      title: this.props.card.title || '',
       description: this.props.card.description || '',
     })
   }
@@ -28,9 +28,7 @@ class CardForm extends Component {
     if (members.includes(e.target.value)) {
       let targetIndex = members.indexOf(e.target.value);
       members.splice(targetIndex, 1); 
-    } else {
-      members.push(e.target.value);
-    }
+    } else members.push(e.target.value);
     this.setState({selectedMembers: members})
   }
 
@@ -41,7 +39,6 @@ class CardForm extends Component {
       description: this.state.description,
       people: this.state.selectedMembers,
     }
-    console.log(newCard);
     this.props.handleSubmit(newCard);
   }
 
@@ -82,7 +79,7 @@ class CardForm extends Component {
             </>
           ))}
         </div>
-        <button className={'formButton'} onClick={e => this.props.handleDestroy(e)}>Destroy!</button>
+        {this.props.destroy ? <button className={'formButton'} onClick={e => this.props.handleDestroy(e)}>Destroy!</button> : <></>}
         <button className={'formButton'} onClick={e => this.handleSubmit(e)}>Submit!</button>
       </div>
     );
@@ -95,6 +92,7 @@ CardForm.propTypes = {
   boardMembers: PropTypes.array,
   handleSubmit: PropTypes.func,
   handleDestroy: PropTypes.func,
+  destroy: PropTypes.bool,
 }
  
 export default CardForm;

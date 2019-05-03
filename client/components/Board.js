@@ -50,7 +50,8 @@ class Board extends Component {
 
 
   //Turn form on or off set state with last opened card
-  displayForm(formToDisplay = '', listId = 0, cardId = 0, card = {}) {
+  displayForm(formToDisplay = '', listId = 0, cardId = 0, card = {}, e) {
+    if (e && e.target.localName === 'button') formToDisplay = '';
     this.setState({
       currentForm: formToDisplay,
       currentList: listId, 
@@ -82,6 +83,17 @@ class Board extends Component {
     this.updateBoardById(this.state.boardId, updateBoard);
   }
 
+  move(cardId, listId, direction) {
+    let updateBoard = [...this.state.lists];
+    let newIndex = listId + direction;
+    if (newIndex >= 0 && newIndex < updateBoard.length) {
+      let movingCard = updateBoard[listId].cards[cardId];
+      updateBoard[listId].cards.splice(cardId, 1);
+      updateBoard[listId + direction].cards.push(movingCard);
+      this.updateBoardById(this.state.boardId, updateBoard);
+    }
+  }
+
 
   //List methods
   addList(e) {
@@ -109,6 +121,7 @@ class Board extends Component {
             listId={i} 
             boardMembers={this.state.boardMembers}
             showForm={this.displayForm.bind(this)}
+            move={this.move.bind(this)}
             destroyList={this.destroyList.bind(this)}
           />
         ))}

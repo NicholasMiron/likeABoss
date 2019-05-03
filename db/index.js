@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-require('dotenv').config();
 
 mongoose.Promise = global.Promise;
 
@@ -39,9 +38,7 @@ const addBoard = (boardId, lists) => {
   return newBoard.save();
 }
 
-const getList = (listTitle) => (
-  Board.findOne({ 'lists.title': listTitle })
-)
+const getList = (listTitle) => Board.findOne({ 'lists.title': listTitle })
 
 const addList = (boardId, list) => Board.findOneAndUpdate(
     { _id: boardId },

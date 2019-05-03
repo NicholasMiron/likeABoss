@@ -6,13 +6,13 @@ const DisplayForm = ({whichForm, boardMembers, addCard, updateCard, destroyCard,
   if (whichForm === 'add') {
     return (
       <div id={'modal'}>
-        <CardForm boardMembers={boardMembers} handleSubmit={addCard} handleDestroy={destroyCard} card={card} />
+        <CardForm boardMembers={boardMembers} handleSubmit={addCard} handleDestroy={destroyCard} card={card} destroy={false}/>
       </div>
     )
   } else if (whichForm === 'update') {
     return (
       <div id={'modal'}>
-        <CardForm boardMembers={boardMembers} handleSubmit={updateCard} handleDestroy={destroyCard} card={card} />
+        <CardForm boardMembers={boardMembers} handleSubmit={updateCard} handleDestroy={destroyCard} card={card} destroy={true}/>
       </div>
     )
   } else return <></>

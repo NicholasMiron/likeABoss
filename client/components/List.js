@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
 
-const List = ({list, showForm, listId, destroyList}) => {
+const List = ({list, showForm, listId, destroyList, move}) => {
   return ( 
     <div className={'list'}>
       <div className={'listTitle'}>{list.name}</div>
       <div className={'cardList'}>
         {list.cards.map((card, i) => (
           <>
-            <Card key={i} cardId={i} card={card} updateCard={showForm} listId={listId}/>
+            <Card key={i} cardId={i} card={card} updateCard={showForm} listId={listId} move={move}/>
           </>
         ))}
       </div>
@@ -24,6 +24,7 @@ List.propTypes = {
   showForm: PropTypes.func,
   listId: PropTypes.number,
   destroyList: PropTypes.func,
+  move: PropTypes.func,
 }
 
 export default List;
